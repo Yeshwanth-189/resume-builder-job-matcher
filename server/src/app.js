@@ -8,6 +8,9 @@ app.use(express.json());
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/api/auth", authRoutes);
+const resumeRoutes = require("./routes/resume.routes");
+app.use("/api/resumes", resumeRoutes); 
+
 
 
 // Middleware
