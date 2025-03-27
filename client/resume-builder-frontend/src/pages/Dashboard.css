@@ -1,0 +1,13 @@
+.dashboard-header{
+    background-color:black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'manrope', sans-serif;
+    padding-left: 5% !important;
+    font-size: large !important;
+}
+.container{
+    display:flex;
+    justify-content:space-between;
+}

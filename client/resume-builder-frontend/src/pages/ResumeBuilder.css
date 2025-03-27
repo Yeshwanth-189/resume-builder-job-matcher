@@ -1,0 +1,44 @@
+.resume-builder-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'manrope', sans-serif;
+    padding-left: 5% !important;
+}
+.container{
+    display:flex;
+    justify-content:space-between;
+}
+
+.custom-steps .ant-steps-item {
+    flex: 1 1 0;
+    min-width: 124px !important;
+    text-align: center;
+  }
+  
+  /* Ensure the number and title are vertically aligned */
+  .custom-steps .ant-steps-item-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 124px !important;
+    align-items: center;
+  }
+  
+  /* Push title below the number */
+  .custom-steps .ant-steps-item-title {
+    margin-top: 8px;
+    min-width: 124px !important;
+  }
+  
+  /* Override the tail to make the dash uniform */
+  .custom-steps .ant-steps-item-tail {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Optional: make dash line thinner and lighter */
+  .custom-steps .ant-steps-item-tail::after {
+    background-color: #d9d9d9 !important;
+    height: 2px !important;
+  }

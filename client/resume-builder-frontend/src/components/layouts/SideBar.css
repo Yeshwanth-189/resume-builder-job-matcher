@@ -1,0 +1,32 @@
+  .sidebar-sider {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    background-color: #ffffff; 
+    font-family: 'manrope', sans-serif;
+  }
+
+  .sidebar-menu{
+    font-family: 'manrope', sans-serif !important;
+    min-height: 925px;
+  }
+  
+  .custom-sidebar-trigger {
+    text-align: center;
+    padding: 12px 0;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: 'manrope', sans-serif !important
+  }
+  
+  .trigger-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+  
