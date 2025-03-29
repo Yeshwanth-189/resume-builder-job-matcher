@@ -9,18 +9,20 @@ const ProfileForm = ({ data, onChange }) => {
   return (
     <Card
       style={{
-        width: '80%',
-        margin: '5% auto',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-        borderRadius: '12px',
-        padding: '40px',
-        background: '#fff',
-        fontFamily: 'manrope',
+        width: "80%",
+        margin: "5% auto",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        borderRadius: "12px",
+        padding: "40px",
+        background: "#fff",
+        fontFamily: "manrope",
       }}
     >
       <div style={{ textAlign: "left" }}>
-        <h2 style={{ fontFamily: 'manrope' }}>Let employers know who you are</h2>
-        <p style={{ fontFamily: 'manrope' }}>Enter your personal information for employers to contact you</p>
+        <h2 style={{ fontFamily: "manrope" }}>Let employers know who you are</h2>
+        <p style={{ fontFamily: "manrope" }}>
+          Enter your personal information for employers to contact you
+        </p>
       </div>
 
       <Form
@@ -28,32 +30,43 @@ const ProfileForm = ({ data, onChange }) => {
         initialValues={data}
         onValuesChange={(_, values) => handleChange(values)}
       >
-        <Form.Item name="fullName">
-          <span style={{ fontFamily: 'manrope' }}>Full Name</span>
+        <Form.Item
+          label={<span style={{ fontFamily: "manrope" }}>Full Name</span>}
+          name="fullName"
+        >
           <Input
-            style={{ fontFamily: 'manrope' }}
+            style={{ fontFamily: "manrope" }}
             placeholder="Enter your full name"
           />
         </Form.Item>
-        <Form.Item name="email">
-          <span style={{ fontFamily: 'manrope' }}>Email</span>
+
+        <Form.Item
+          label={<span style={{ fontFamily: "manrope" }}>Email</span>}
+          name="email"
+        >
           <Input
             type="email"
-            style={{ fontFamily: 'manrope' }}
+            style={{ fontFamily: "manrope" }}
             placeholder="Enter your email here"
           />
         </Form.Item>
-        <Form.Item name="phone">
-          <span style={{ fontFamily: 'manrope' }}>Phone Number</span>
+
+        <Form.Item
+          label={<span style={{ fontFamily: "manrope" }}>Phone Number</span>}
+          name="phone"
+        >
           <Input
-            style={{ fontFamily: 'manrope' }}
+            style={{ fontFamily: "manrope" }}
             placeholder="+1 234 567 890"
           />
         </Form.Item>
-        <Form.Item name="location">
-          <span style={{ fontFamily: 'manrope' }}>Location</span>
+
+        <Form.Item
+          label={<span style={{ fontFamily: "manrope" }}>Location</span>}
+          name="location"
+        >
           <Input
-            style={{ fontFamily: 'manrope' }}
+            style={{ fontFamily: "manrope" }}
             placeholder="City, Country"
           />
         </Form.Item>

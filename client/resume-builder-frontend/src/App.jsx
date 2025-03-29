@@ -6,10 +6,6 @@ const App = () => {
     <>
     <Router>
       <Routes>
-        {/* Redirect root to dashboard */}
-        <Route path="/" element={<Navigate to="/resume-builder" replace />} />
-        
-        {/* AppRoutes will include nested routes like /dashboard, /resumes, etc. */}
         <Route path="/*" element={<AppRoutes />} />
       </Routes>
     </Router>

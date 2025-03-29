@@ -2,6 +2,11 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
     background-color: #ffffff; 
     font-family: 'manrope', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000; 
   }
 
   .sidebar-menu{
@@ -29,4 +34,3 @@
     height: 20px;
     object-fit: contain;
   }
-  

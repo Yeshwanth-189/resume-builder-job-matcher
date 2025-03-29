@@ -3,7 +3,7 @@ import { Input, Button, Space, Card } from "antd";
 
 const EducationForm = ({ data, onChange }) => {
   const handleAdd = () => {
-    onChange([...data, { institution: "", degree: "", year: "" }]);
+    onChange([...data, { institution: "", degree: "", GPA: "" }]);
   };
 
   const handleChange = (index, key, value) => {
@@ -43,29 +43,30 @@ const EducationForm = ({ data, onChange }) => {
           style={{
             display: "block",
             marginBottom: 24,
-            padding: 16,
-            border: "1px solid #f0f0f0",
+            padding: 24,
             borderRadius: 8,
-            background: "#fafafa",
           }}
         >
+           <span style={{ fontFamily: 'manrope', fontSize: 13, fontWeight: 600 }}>Institution</span>
           <Input
             placeholder="Enter Institution name"
             value={item.institution}
             onChange={(e) => handleChange(index, "institution", e.target.value)}
-            style={{ fontFamily: "manrope" }}
+            style={{ fontFamily: 'manrope', paddingTop: 10, paddingBottom: 10 ,marginBottom: 10}}
           />
+          <span style={{ fontFamily: 'manrope', fontSize: 13, fontWeight: 600 }}>Degree</span>
           <Input
             placeholder="Enter your degree here"
             value={item.degree}
             onChange={(e) => handleChange(index, "degree", e.target.value)}
-            style={{ fontFamily: "manrope" }}
+            style={{ fontFamily: 'manrope', paddingTop: 10, paddingBottom: 10 ,marginBottom: 10}}
           />
+          <span style={{ fontFamily: 'manrope', fontSize: 13, fontWeight: 600 }}>GPA</span>
           <Input
-            placeholder="Enter your grad year"
-            value={item.year}
-            onChange={(e) => handleChange(index, "year", e.target.value)}
-            style={{ fontFamily: "manrope" }}
+            placeholder="Enter your GPA"
+            value={item.GPA}
+            onChange={(e) => handleChange(index, "GPA", e.target.value)}
+            style={{ fontFamily: 'manrope', paddingTop: 10, paddingBottom: 10 ,marginBottom: 20}}
           />
           <Button danger onClick={() => handleRemove(index)}>
             Remove

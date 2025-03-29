@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import { Layout, Steps, Button, Space } from "antd";
 import ProfileForm from "./StepForm/ProfileForm";
 import WorkExperienceForm from "./StepForm/WorkExperienceForm";  
@@ -7,8 +8,11 @@ import SkillsForm from "./StepForm/SkillsForm";
 import AdditionalForm from "./StepForm/AdditionalForm";
 import ResumePreview from "./ResumePreview";
 import Sidebar from '../components/layouts/SideBar';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 import './ResumeBuilder.css';
 import Logo from '@/components/common/Logo';
+import ResumeBuilderBg from '../assets/icons/ResumeBuilderBg.png';
 const { Content, Sider } = Layout;
 
 const steps = [
@@ -38,6 +42,7 @@ const ResumeBuilder = () => {
 
   const next = () => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   const prev = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
+  const collapsed = useSelector((state) => state.ui.sidebarCollapsed);
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -57,12 +62,15 @@ const ResumeBuilder = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" , fontFamily: 'manrope'}}>
-      <Sider width={200}>
+    <Layout style={{ minHeight: "100v" , fontFamily: 'manrope', backgroundImage:`url(${ResumeBuilderBg})` ,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat' , backgroundPosition: 'center' , backgroundAttachment: 'fixed'}}>
         <Sidebar />
-      </Sider>
-
-      <Layout style={{backgroundColor:' #e6f4ff', fontFamily: 'manrope'}}>
+        <div
+        style={{
+          flex: 1,
+          marginLeft: collapsed ? 80 : 200,
+          transition: 'margin-left 0.3s ease',
+        }}
+      ><Layout style={{backgroundColor:' #e6f4ff', fontFamily: 'manrope', backgroundImage:`url(${ResumeBuilderBg})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat' , backgroundPosition: 'center' , backgroundAttachment: 'fixed'}}>
       <div
           className="resume-builder-header"
           style={{
@@ -78,6 +86,11 @@ const ResumeBuilder = () => {
           <h2>Craft Your Resume 📝</h2>
           <Logo/>
         </div>
+        <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
         <Content style={{ padding: "24px", display: "flex", gap: "24px", fontFamily: 'manrope' }}>
           <div style={{ flex: 1, fontFamily: 'manrope'}}>
             <Steps current={currentStep} direction="horizontal" items={steps} className="custom-steps" />
@@ -104,7 +117,7 @@ const ResumeBuilder = () => {
                 padding: "40px",
                 border: "1px solid #e0e0e0",
                 borderRadius: "8px",
-                minHeight: "100%",
+                height: "750px",
                 width: "100%",
                 fontFamily: "manrope",
                 boxSizing: "border-box",
@@ -113,7 +126,10 @@ const ResumeBuilder = () => {
             <ResumePreview data={formData} />
           </div>
         </Content>
-      </Layout>
+        </motion.div>
+      </Layout></div>
+
+      
     </Layout>
   );
 };
