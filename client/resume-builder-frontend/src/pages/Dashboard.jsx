@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch} from 'react-redux';
+import { scanResumeRequest } from '../features/resume/resumeActions';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Input, Button, Typography, Row, Col, Space, Layout, Card, message } from 'antd';
@@ -17,13 +18,16 @@ const { Title } = Typography;
 const { Header, Content } = Layout;
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const collapsed = useSelector((state) => state.ui.sidebarCollapsed);
   const fileInputRef = useRef(null);
-  // eslint-disable-next-line no-unused-vars
-  const [resumeText, setResumeText] = useState('');
+  const [resumeText, setResumeText] = useState('');4
+  const [jobDescriptionText, setJobDescriptionText] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [matchPercentage, setMatchPercentage] = useState(null);
 const [modalVisible, setModalVisible] = useState(false);
+// eslint-disable-next-line no-unused-vars
 const [suggestions, setSuggestions] = useState([]);
 
 
@@ -62,6 +66,16 @@ const [suggestions, setSuggestions] = useState([]);
       message.error('Failed to extract resume content.');
       console.error(error);
     }
+  };
+  
+  	
+  const handleScanClick = () => {
+    if (!resumeText || !jobDescriptionText) {
+      message.error('Please provide both Resume text and Job Description text.');
+      return;
+    }
+    // 🔥 Dispatching Redux action with both payloads
+    dispatch(scanResumeRequest(resumeText, jobDescriptionText));
   };
 
   return (
@@ -123,6 +137,7 @@ const [suggestions, setSuggestions] = useState([]);
                           placeholder="Paste Resume here..."
                           autoSize={false}
                           disabled={isDisabled}
+                          onChange={e => setResumeText(e.target.value)}
                           style={{
                             height: '200px',
                             overflowY: 'auto',
@@ -138,6 +153,8 @@ const [suggestions, setSuggestions] = useState([]);
                       <Input.TextArea
                           placeholder="Paste Job Description here..."
                           autoSize={false}
+                          value={jobDescriptionText}
+                          onChange={e => setJobDescriptionText(e.target.value)}
                           style={{
                             height: '200px',
                             overflowY: 'auto',
@@ -181,19 +198,20 @@ const [suggestions, setSuggestions] = useState([]);
                           height: 40,
                         }}
                         onClick={() => {
+                          handleScanClick();
                           // Simulate skill match from API
-                          setTimeout(() => {
-                            const score = Math.floor(Math.random() * 41) + 60; // Random score 60-100
-                            setMatchPercentage(score);
-                            const sampleSuggestions = [
-                              "Add more action verbs in your experience section.",
-                              "Mention more relevant skills like Redux and FastAPI.",
-                              "Improve your project descriptions to highlight accomplishments."
-                            ];
-                            setSuggestions(sampleSuggestions);
-                            message.success('Scan completed!');
-                            setModalVisible(true);
-                          }, 1000);
+                          // setTimeout(() => {
+                          //   const score = Math.floor(Math.random() * 41) + 60; // Random score 60-100
+                          //   setMatchPercentage(score);
+                          //   const sampleSuggestions = [
+                          //     "Add more action verbs in your experience section.",
+                          //     "Mention more relevant skills like Redux and FastAPI.",
+                          //     "Improve your project descriptions to highlight accomplishments."
+                          //   ];
+                          //   setSuggestions(sampleSuggestions);
+                          //   message.success('Scan completed!');
+                          //   setModalVisible(true);
+                          // }, 1000);
                         }}
                       >
                         Scan

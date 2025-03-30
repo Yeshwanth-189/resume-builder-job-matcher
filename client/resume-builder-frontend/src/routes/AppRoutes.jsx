@@ -33,7 +33,7 @@ const AppRoutes = () => {
       <Route path="/match-checker" element={<MatchAnalyzer />} />
 
       {/* 404 Fallback */}
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<Register/>} />
     </Routes>
   );
 };

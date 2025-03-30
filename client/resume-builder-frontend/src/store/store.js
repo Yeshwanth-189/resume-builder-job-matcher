@@ -1,9 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import uiReducer from '../store/slices/uiSlices';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from './rootReducer';
+import rootSaga from './rootSaga';
 
-export const store = configureStore({
-  reducer: {
-    ui: uiReducer,
-    // add more reducers here (resume, auth, etc.)
-  },
+const sagaMiddleware = createSagaMiddleware();
+
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware), 
 });
+
+sagaMiddleware.run(rootSaga);
+
+export default store;
