@@ -19,7 +19,8 @@ An AI-powered resume builder and job matcher that helps users craft perfect resu
 ## 📸 Screenshots
 
 1. **Dashboard:**
-![image](https://github.com/user-attachments/assets/a61cc8d3-76bd-4997-b5bd-d2451d63e239)
+![image](https://github.com/user-attachments/assets/57814416-a30b-4a1f-ac1e-25acfc697cf4)
+
 
 
 2. **Skill Match Gauge:**
