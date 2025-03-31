@@ -11,7 +11,7 @@ export const scanResumeRequest = (resumeText, jobDescriptionText) => ({
 // Action dispatched when scan succeeds
 export const scanResumeSuccess = (data) => ({
     type: SCAN_RESUME_SUCCESS,
-    payload: data
+    payload: {data}
 });
 
 // Action dispatched when scan fails

@@ -1,4 +1,6 @@
 import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from './types';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
+
 
 const initialState = {
     loading: false,
@@ -14,6 +16,12 @@ const authReducer = (state = initialState, action) => {
             return { ...state, loading: false, successMessage: "success" };
         case REGISTER_FAILURE:
             return { ...state, loading: false, error: action.payload };
+            case LOGIN_REQUEST:
+                return { ...state, loading: true, error: null };
+            case LOGIN_SUCCESS:
+                return { ...state, loading: false, successMessage: "success" };
+            case LOGIN_FAILURE:
+                return { ...state, loading: false, error: action.payload };       
         default:
             return state;
     }

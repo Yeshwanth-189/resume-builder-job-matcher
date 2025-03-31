@@ -57,7 +57,7 @@ const ProfileForm = ({ data, onChange }) => {
         >
           <Input
             style={{ fontFamily: "manrope" }}
-            placeholder="+1 234 567 890"
+            placeholder="+1 XXX XXX XXXX"
           />
         </Form.Item>
 

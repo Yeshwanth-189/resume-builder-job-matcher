@@ -20,17 +20,28 @@ const { Header, Content } = Layout;
 const Dashboard = () => {
   const dispatch = useDispatch();
   const collapsed = useSelector((state) => state.ui.sidebarCollapsed);
+  const scanData = useSelector((state) => state.resume.data); 
+  const scanLoading=useSelector((state) => state.resume.loading);
+  console.log(scanLoading)
   const fileInputRef = useRef(null);
   const [resumeText, setResumeText] = useState('');4
   const [jobDescriptionText, setJobDescriptionText] = useState('');
-  const [isDisabled, setIsDisabled] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const [matchPercentage, setMatchPercentage] = useState(null);
-const [modalVisible, setModalVisible] = useState(false);
-// eslint-disable-next-line no-unused-vars
-const [suggestions, setSuggestions] = useState([]);
+  const [matchPercentage, setMatchPercentage] = useState(0);
+  const [suggestions, setSuggestions] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
-
+  function normalizeText(text) {
+    // Remove multiple newlines and replace them with a single space
+    text = text.replace(/[\r\n]+/g, ' ');
+    // Replace multiple spaces with a single space
+    text = text.replace(/\s+/g, ' ');
+    // Remove any unwanted characters (example: bullet points, if needed)
+    text = text.replace(/[\u2022\u2023]/g, ''); // removes common bullet symbols
+    return text.trim();
+  }
+  
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
@@ -50,14 +61,14 @@ const [suggestions, setSuggestions] = useState([]);
             const content = await page.getTextContent();
             text += content.items.map((s) => s.str).join(' ') + '\n';
           }
-          setResumeText(text);
+          setResumeText(normalizeText(text));
           setIsDisabled(true);
         };
         fileReader.readAsArrayBuffer(file);
       } else if (fileType === 'docx') {
         const arrayBuffer = await file.arrayBuffer();
         const result = await mammoth.extractRawText({ arrayBuffer });
-        setResumeText(result.value);
+        setResumeText(normalizeText(result.value));
         setIsDisabled(true);
       } else {
         message.error('Unsupported file format. Please upload a PDF or DOCX file.');
@@ -197,21 +208,29 @@ const [suggestions, setSuggestions] = useState([]);
                           borderRadius: 6,
                           height: 40,
                         }}
+                        loading={scanLoading}
                         onClick={() => {
                           handleScanClick();
-                          // Simulate skill match from API
-                          // setTimeout(() => {
-                          //   const score = Math.floor(Math.random() * 41) + 60; // Random score 60-100
-                          //   setMatchPercentage(score);
-                          //   const sampleSuggestions = [
-                          //     "Add more action verbs in your experience section.",
-                          //     "Mention more relevant skills like Redux and FastAPI.",
-                          //     "Improve your project descriptions to highlight accomplishments."
-                          //   ];
-                          //   setSuggestions(sampleSuggestions);
-                          //   message.success('Scan completed!');
-                          //   setModalVisible(true);
-                          // }, 1000);
+                          setTimeout(() => {
+                            const sampleSuggestions = [
+                              `Your match verdict is : ${scanData.data.verdict}`,
+                              `${scanData.data.missing_skills.length > 0 
+                                ? `You are missing these skills mentioned in the job description : ${scanData.data.missing_skills}` 
+                                : ''}`,
+                              `${scanData.data.found_headers.length > 0 
+                                ? `We found these sections in your resume : ${scanData.data.found_headers}` 
+                                : ''}`,
+                             `${scanData.data.missing_headers.length > 0 
+                                ? `We could not find these sections in your resume: ${scanData.data.missing_headers}` 
+                                : ''}`,
+                                
+                            ];
+                            setSuggestions(
+                              sampleSuggestions.filter(suggestion => suggestion.trim().length > 0)
+                            );
+                            message.success('Scan completed!');
+                            setModalVisible(true);
+                          }, 1000);
                         }}
                       >
                         Scan
@@ -219,8 +238,8 @@ const [suggestions, setSuggestions] = useState([]);
                       <SkillMatchModal
                         visible={modalVisible}
                         onClose={() => setModalVisible(false)}
-                        matchPercentage={matchPercentage}
-                        suggestions={suggestions}
+                        matchPercentage={scanData ? scanData.data.match_score : null}
+                        suggestions={suggestions ? suggestions: []}
                       />
                     </Space>
                   </div>

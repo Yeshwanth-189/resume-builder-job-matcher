@@ -40,7 +40,7 @@ const Register = () => {
                 <Col 
                     span={10} 
                     style={{ 
-                        textAlign: 'center',
+                        textAlign: 'left',
                         backgroundColor: 'white', 
                         padding: '40px', 
                         borderRadius: '16px',
@@ -53,7 +53,7 @@ const Register = () => {
                         initial="hidden"
                         animate="visible"
                     >
-                        <h2 style={{ fontSize: '2rem', marginBottom: '30px', fontFamily: 'manrope', color: '#4d4d4d' }}>
+                        <h2 style={{ fontSize: '2rem', marginBottom: '30px', marginLeft:'23%',fontFamily: 'manrope', color: '#4d4d4d' }}>
                             Welcome Back!
                         </h2>
                         

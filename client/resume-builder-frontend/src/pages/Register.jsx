@@ -57,7 +57,7 @@ const Register = () => {
                 <Col 
                     span={10} 
                     style={{ 
-                        textAlign: 'center',
+                        textAlign: 'left',
                         backgroundColor: 'white', 
                         padding: '40px', 
                         borderRadius: '16px',
@@ -70,14 +70,14 @@ const Register = () => {
                         initial="hidden"
                         animate="visible"
                     >
-                        <h2 style={{ fontSize: '2rem', marginBottom: '30px', fontFamily: 'manrope', color: '#4d4d4d' }}>
+                        <h2 style={{ fontSize: '2rem', marginBottom: '30px', marginLeft:'22%', fontFamily: 'manrope', color: '#4d4d4d' }}>
                             Register Now!
                         </h2>
                         
                         <Form
                             name="register_form"
                             layout="vertical"
-                            style={{ width: '90%' }}
+                            style={{ width: '90%' , marginLeft: '0%'}}
                             onFinish={onFinish}
                         >
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' , marginLeft: '7%'}}>

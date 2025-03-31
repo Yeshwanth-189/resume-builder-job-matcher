@@ -48,8 +48,8 @@ const ResumePreview = ({ data }) => {
       {profile.fullName && (
         <div style={{ marginBottom: 20 }}>
           <h1>{profile.fullName}</h1>
-          <p>{profile.email}</p>
-          <p>{profile.phone}</p>
+          <p>✉️ {profile.email}</p>
+          <p>🖁{profile.phone}</p>
           <p>{profile.location}</p>
         </div>
       )}
